@@ -1,20 +1,29 @@
 import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.is;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class MinesweeperTest {
-	@Test
-	public void check_output_result() {
+	
+	private Minesweeper ms = null;
+	private int fieldNumber = 0;
+	
+	@Before
+	public void initialise() {
 		
 		String[][] inputGround = {
-				{"*", ".", ".", "."},
-				{".", ".", ".", "."},
-				{".", "*", ".", "."},
-				{".", ".", ".", "."}
+			{"*", ".", ".", "."},
+			{".", ".", ".", "."},
+			{".", "*", ".", "."},
+			{".", ".", ".", "."}
 		};
 		
-		Minesweeper ms = new Minesweeper(inputGround, 0, 0, 3, 3);
-		
+		ms = new Minesweeper(inputGround, 1, 0, 0, 3, 3);
+	}
+	
+	@Test
+	public void check_output_result() {
 		
 		assertEquals(0, ms.getAdjacentValue(0, 0));
 		assertEquals(1, ms.getAdjacentValue(0, 1));
@@ -36,6 +45,15 @@ public class MinesweeperTest {
 		assertEquals(1, ms.getAdjacentValue(3, 2));
 		assertEquals(0, ms.getAdjacentValue(3, 3));
 		
+	}
+	
+	@Test
+	public void check_output_name_of_field() {
+		fieldNumber = ms.getFieldNumber();
+		
+		String fieldName = ms.createFieldName(fieldNumber);
+		
+		assertThat(fieldName, is("Field #1"));
 	}
 	
 }

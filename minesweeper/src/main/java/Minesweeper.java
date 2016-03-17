@@ -1,5 +1,6 @@
 public class Minesweeper {
 	
+	private static String FIELD = "Field #";
 	private static String STAR = "*";
 	private static String DOT = ".";
 	
@@ -14,16 +15,20 @@ public class Minesweeper {
 	private int boundMaxM = 4;
 	private int boundMinN = 0;
 	private int boundMaxN = 4;
+	private int fieldNumber = 1;
 	
 	private int adjacentValue = 0;
 	
-	public Minesweeper(String[][] inputGround, int boundMinM, int boundMinN, int boundMaxN, int boundMaxM) {
+	public Minesweeper(String[][] inputGround, int fieldNumber, int boundMinM, int boundMinN, int boundMaxN, int boundMaxM) {
 		this.inputGround = inputGround;
+		this.setFieldNumber(fieldNumber);
 		this.boundMinN = boundMinN;
 		this.boundMinM = boundMinM;
 		this.boundMaxN = boundMaxN;
 		this.boundMaxM = boundMaxM;
 	}
+	
+	
 	
 	public int getAdjacentValue(int m, int n) {
 		
@@ -194,5 +199,21 @@ public class Minesweeper {
 		if (inputGround[m+1][n+1] == STAR)
 			adjacentValue++;
 		return adjacentValue;
+	}
+	
+	public String createFieldName(int fieldNumber) {
+		String fieldName = "";
+		
+		fieldName = FIELD + fieldNumber;
+		
+		return fieldName;
+	}
+	
+	public int getFieldNumber() {
+		return this.fieldNumber;
+	}
+	
+	public void setFieldNumber(int fieldNumber) {
+		this.fieldNumber = fieldNumber;
 	}
 }
